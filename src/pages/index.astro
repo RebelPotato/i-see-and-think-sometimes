@@ -1,8 +1,9 @@
 ---
-
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
-
-<html lang="en">
+<html lang="zh-Hans">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -11,9 +12,11 @@
     <title>🍍</title>
   </head>
   <body>
-    <a href="/">🍍</a>
-    <a href="/about/">关于</a>
-    <a href="/exists/">存在的东西</a>
+    <Header />
     <h1>Astro</h1>
+		<Footer />
   </body>
+	<script>
+		import "../scripts/menu.ts";
+	</script>
 </html>

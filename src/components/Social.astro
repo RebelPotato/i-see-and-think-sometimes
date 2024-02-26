@@ -1,0 +1,21 @@
+---
+interface Props {
+  platform: string;
+  username: string;
+  icon?: string;
+}
+
+let { platform, username, icon } = Astro.props;
+if (!icon) icon = platform;
+---
+
+<a href={`https://${platform}.com/${username}`}>{icon}</a>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>

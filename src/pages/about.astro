@@ -1,9 +1,29 @@
-<body>
-  <a href="/">🍍</a>
-  <a href="/about/">关于</a>
-  <a href="/exists/">存在的东西</a>
+---
+import "../styles/global.css";
+import Navigation from "../components/Navigation.astro";
+import Footer from '../components/Footer.astro';
+---
 
-  <h1>你好🍍</h1>
-  <p>我是黄晨轩。暂时没有主业，闲暇时写代码以自娱。</p>
-  <p>要不，<a href="mailto:huangcx22@mails.tsinghua.edu.cn">给我发邮件</a>？</p>
-</body>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>🍍</title>
+    <style>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+
+    <h1>你好🍍</h1>
+    <p>我是黄晨轩。暂时没有主业，闲暇时写代码以自娱。</p>
+
+    <Footer />
+  </body>
+</html>
