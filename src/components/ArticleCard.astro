@@ -1,0 +1,31 @@
+---
+interface Props {
+  url?: string,
+  title: string,
+}
+const {url, title} = Astro.props;
+---
+<style>
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .card .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .card .url {
+    color: blue;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="card">
+  <h2 class="title">{title}</h2>
+  <a class="url" href={url}>{url}</a>
+</div>

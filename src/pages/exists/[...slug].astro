@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import ExistsLayout from '../../layouts/ExistsLayout.astro';
+
+interface Props {
+    entry: any;
+}
+
+export async function getStaticPaths() {
+  const entries = await getCollection('exists');
+  return entries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<ExistsLayout frontmatter={entry.data}>
+  <Content />
+</ExistsLayout>
