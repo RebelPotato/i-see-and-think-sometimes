@@ -1,29 +1,72 @@
 ---
-import { Image } from 'astro:assets';
-const {url, image, alt} = Astro.props;
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  url: string;
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+  };
+  alt: string;
+  pubDate: Date;
+  description: string;
+  link: string;
+}
+
+const { url, image, alt, pubDate, description, link, title } = Astro.props;
+const date = pubDate.toISOString().slice(0, 10);
 ---
+
 <style>
   .card {
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
     padding: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 96px;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
   }
 
-  .card img {
+  .card p {
+    grid-column: 1/-1;
+    text-align: center;
+  }
+
+  .card p a {
+    color: var(--color-red);
+    text-decoration: none;
+  }
+  .card p a:hover {
+    font-weight: bold;
+  }
+  .card .wrapper {
+    display: block;
+    width: 100%;
+    grid-column: 1/-1;
+  }
+
+  .card .wrapper img {
     display: block;
     width: 100%;
     height: auto;
+    grid-column: 1/-1;
+  }
+
+  .card time {
+    grid-column: 1/2;
   }
 
   .card .url {
-    color: blue;
-    text-decoration: underline;
+    grid-column: -2/-1;
   }
 </style>
 
-<div class="card">
-  <Image src={image} alt={alt}/>
-  <a class="url" href={url}>{url}</a>
-</div>
+<article class="card">
+  <p><a href={url}>「比如」</a>{description}</p>
+  <a class="wrapper" href={url}><Image src={image} alt={alt} /></a>
+  <time datetime={date}>{date}</time>
+  <a class="url" href={link}>GOTO {title}</a>
+</article>

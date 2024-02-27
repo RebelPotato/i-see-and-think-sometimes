@@ -2,14 +2,23 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
-const allExists = (await getCollection("exists")).sort((a, b) => (a.data.pubDate > b.data.pubDate ? 1 : -1));
+const allExists = (await getCollection("exists")).sort((a, b) =>
+  a.data.pubDate > b.data.pubDate ? 1 : -1
+);
 ---
 
-<BaseLayout pageTitle="存在的东西">
-  <p>有一些东西存在。比如：</p>
+<BaseLayout pageTitle="存在的东西" current="exists">
   {
     allExists.map((post) => (
-      <ArticleCard url={`/exists/${post.slug}/`} image={post.data.image} alt={post.data.alt} />
+      <ArticleCard
+        title={post.data.title}
+        description={post.data.description}
+        url={`/exists/${post.slug}/`}
+        image={post.data.image}
+        alt={post.data.alt}
+        pubDate={post.data.pubDate}
+        link={post.data.link}
+      />
     ))
   }
 </BaseLayout>

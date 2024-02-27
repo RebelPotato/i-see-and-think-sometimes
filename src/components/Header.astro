@@ -1,11 +1,32 @@
 ---
-import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
+
+interface Astro {
+  title?: string;
+  current?: string;
+}
+
+const {title, current} = Astro.props
 ---
 
 <header>
+  {title && <h1>{title}</h1>}
   <nav>
-    <Hamburger />
-    <Navigation />
+    <Navigation current={current} />
   </nav>
 </header>
+
+<style>
+  header {
+    padding: 1rem;
+  }
+  header h1 {
+    font-size: 5rem;
+    margin: 2rem;
+    text-align: center;
+  }
+  nav {
+    width: 100%;
+    padding: 1rem;
+  }
+</style>

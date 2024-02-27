@@ -19,3 +19,9 @@ const { Content } = await entry.render();
 <ExistsLayout frontmatter={entry.data}>
   <Content />
 </ExistsLayout>
+
+<style>
+  article>* {
+    grid-column: 2/3;
+  }
+</style>

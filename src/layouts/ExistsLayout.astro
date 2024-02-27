@@ -1,17 +1,72 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   frontmatter: {
     title: string;
-    author: string;
-  }
+    link: string;
+    pubDate: Date;
+    description: string;
+    image: {
+      src: string;
+      width: number;
+      height: number;
+      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+    };
+    alt: string;
+  };
 }
 
 const { frontmatter } = Astro.props;
+const date = frontmatter.pubDate.toISOString().slice(0, 10);
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <slot />
-  <p>Written by {frontmatter.author}</p>
+  <article>
+    <h2 class="intro">
+      <a href={frontmatter.link}>「比如」</a>{frontmatter.description}
+    </h2>
+    <hr />
+    <slot />
+    <Image src={frontmatter.image} alt={frontmatter.alt} />
+    <time datetime={date}>{date}</time>
+  </article>
 </BaseLayout>
+
+<style>
+  article {
+    width: 100%;
+  }
+
+  .intro {
+    width: 100%;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: normal;
+  }
+
+  .intro a {
+    color: var(--color-red);
+    text-decoration: none;
+  }
+  .intro a:hover {
+    font-weight: bold;
+  }
+
+  article hr {
+    margin: 2rem 0;
+  }
+
+  article img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  article time {
+    display: block;
+    width: 100%;
+    text-align: end;
+  }
+</style>

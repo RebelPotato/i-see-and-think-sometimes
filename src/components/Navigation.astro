@@ -1,9 +1,64 @@
 ---
+interface Props {
+  current?: string;
+}
 
+const { current } = Astro.props;
 ---
 
 <div class="nav-links">
-  <a href="/">🍍</a>
-  <a href="/exists/">存在的东西</a>
-  <a href="/about/">关于</a>
+  <a href="/" class:list={current==undefined ? ['current'] : []}>🍍</a>
+  <a href="/exists/" class:list={current=='exists' ? ['current'] : []}>存在的东西</a>
+  <a href="/about/" class:list={current=='about' ? ['current'] : []}>关于</a>
 </div>
+
+<style>
+  .nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    background-color: #ff9776;
+    display: none;
+    margin: 0;
+  }
+
+  .nav-links a {
+    display: inline;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+
+    padding: 0.125rem 0;
+  }
+
+  .nav-links a:not(:last-child) {
+    margin-right: 1rem;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus,
+  .nav-links .current {
+    border-bottom: 0.125rem solid;
+    font-weight: 800;
+  }
+
+  .expanded {
+    display: unset;
+  }
+
+  @media screen and (min-width: 636px) {
+    .nav-links {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      background: none;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
